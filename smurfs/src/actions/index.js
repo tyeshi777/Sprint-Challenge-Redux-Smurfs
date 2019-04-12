@@ -47,7 +47,7 @@ export const addSmurfs = smurf => dispatch => {
   dispatch({ type: ADD_SMURF });
 
   axios
-    .post("http://localhost:3333/smurf", smurf)
+    .post("http://localhost:3333/smurfs/create", smurf)
     .then(res => {
       dispatch({
         type: ADD_SMURF_SUCCESS,
