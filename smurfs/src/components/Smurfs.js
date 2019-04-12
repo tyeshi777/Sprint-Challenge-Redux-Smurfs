@@ -8,10 +8,17 @@ class Smurfs extends React.Component {
     this.props.fetchSmurfs();
   }
   render() {
+    if (this.props.fetchingSmurfs) {
+      return (
+        <div className="loading">
+          <h1>Collecting smurfs...</h1>
+        </div>
+      );
+    }
     return (
-      <div>
+      <div className="smurf-list">
         {this.props.smurfs.map(smurf => {
-          return <Smurf id={smurf.id} smurf={smurf} />;
+          return <Smurf key={smurf.id} smurf={smurf} />;
         })}
       </div>
     );
@@ -19,6 +26,7 @@ class Smurfs extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
     smurfs: state.smurfs,
     fetchingSmurfs: state.fetchingSmurfs

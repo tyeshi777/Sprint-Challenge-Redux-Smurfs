@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { addSmurfs } from "../actions";
 
 class SmurfForm extends Component {
@@ -11,10 +12,15 @@ class SmurfForm extends Component {
     };
   }
 
-  addSmurf = event => {
+  postSmurf = event => {
     event.preventDefault();
     // add code to create the smurf using the api
-    this.props.addSmurfs();
+    this.props.addSmurfs(this.state);
+    this.setState({
+      name: "",
+      age: "",
+      height: ""
+    });
   };
 
   handleInputChange = e => {
@@ -24,7 +30,7 @@ class SmurfForm extends Component {
   render() {
     return (
       <div className="SmurfForm">
-        <form onSubmit={this.addSmurf}>
+        <form onSubmit={this.postSmurf}>
           <input
             onChange={this.handleInputChange}
             placeholder="name"
@@ -50,4 +56,14 @@ class SmurfForm extends Component {
   }
 }
 
-export default SmurfForm;
+const mapStateToProps = state => {
+  return {
+    smurfs: state.smurfs,
+    addingSmurf: state.addingSmurf
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { addSmurfs }
+)(SmurfForm);

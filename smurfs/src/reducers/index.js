@@ -2,12 +2,10 @@
   Be sure to import in all of the action types from `../actions`
 */
 import {
-  FETCH_SMURF_START,
+  FETCH_SMURF,
   FETCH_SMURF_SUCCESS,
   FETCH_SMURF_FAILURE,
-  ADD_SMURF_START,
-  ADD_SMURF_SUCCESS,
-  ADD_SMURF_FAILURE
+  ADD_SMURF
 } from "../actions";
 /*
  Your initial/default state for this project could *Although does not have to* look a lot like this */
@@ -27,9 +25,9 @@ const initialState = {
   There is no need for 'combineReducers' in this project.
   Components can then read your store as, `state` and not `state.fooReducer`.
 */
-export const Reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_SMURF_START:
+    case FETCH_SMURF:
       return {
         ...state,
         error: null,
@@ -40,7 +38,7 @@ export const Reducer = (state = initialState, action) => {
         ...state,
         error: null,
         fetchingSmurfs: false,
-        smurfs: [...action.payload]
+        smurfs: action.payload
       };
     case FETCH_SMURF_FAILURE:
       return {
@@ -48,24 +46,16 @@ export const Reducer = (state = initialState, action) => {
         error: "bam no smurf try again",
         fetchingSmurfs: false
       };
-    case ADD_SMURF_START:
+    case ADD_SMURF:
       return {
         ...state,
         error: null,
         addingSmurf: true
       };
-    case ADD_SMURF_SUCCESS:
-      return {
-        ...state,
-        error: null,
-        smurfs: action.payload
-      };
-    case ADD_SMURF_FAILURE:
-      return {
-        ...state,
-        error: "try again"
-      };
+
     default:
       return state;
   }
 };
+
+export default reducer;

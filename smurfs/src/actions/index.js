@@ -16,14 +16,14 @@
 
 import axios from "axios";
 
-export const FETCH_SMURF_START = "FETCH_SMURF_START";
+export const FETCH_SMURF = "FETCH_SMURF";
 export const FETCH_SMURF_SUCCESS = "FETCH_SMURF_SUCCESS";
 export const FETCH_SMURF_FAILURE = "FETCH_SMURF_FAILURE";
 
 export const fetchSmurfs = () => dispatch => {
-  dispatch({ type: FETCH_SMURF_START });
+  dispatch({ type: FETCH_SMURF });
 
-  return axios
+  axios
     .get("http://localhost:3333/smurfs")
     .then(res => {
       dispatch({
@@ -39,19 +39,15 @@ export const fetchSmurfs = () => dispatch => {
     });
 };
 
-export const ADD_SMURF_START = "ADD_SMURF_START";
+export const ADD_SMURF = "ADD_SMURF";
 export const ADD_SMURF_SUCCESS = "ADD_SMURF_SUCCESS";
 export const ADD_SMURF_FAILURE = "ADD_SMURF_FAILURE";
 
-export const addSmurfs = () => dispatch => {
-  dispatch({ type: ADD_SMURF_START });
+export const addSmurfs = smurf => dispatch => {
+  dispatch({ type: ADD_SMURF });
 
   axios
-    .post("http://localhost:3333/smurfs", {
-      name: "",
-      age: "",
-      height: ""
-    })
+    .post("http://localhost:3333/smurf", smurf)
     .then(res => {
       dispatch({
         type: ADD_SMURF_SUCCESS,

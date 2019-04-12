@@ -17,7 +17,7 @@ class App extends Component {
       <div className="App">
         <h1>SMURFS! 2.0 W/ Redux</h1>
         <SmurfForm addSmurfs={this.props.addSmurfs} />
-        <Smurfs />
+        <Smurfs smurf={this.props.smurf} />
       </div>
     );
   }
